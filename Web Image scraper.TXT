@@ -1,0 +1,22 @@
+#Importing libraries required
+import urllib.request
+import pandas as pd
+
+#function to download image
+def download_image(url, file_path, file_name):
+    full_path = file_path + file_name + '.jpg'
+    urllib.request.urlretrieve(url, full_path)
+
+#list of images/urls to download
+DownloadList = pd.read_csv('C:/Users/*your username*/Desktop/download list.csv')
+
+#Loop to download images
+for ind in DownloadList.index:
+    file_name = DownloadList['Filename'][ind]
+    url = DownloadList['Image Src'][ind]
+    
+    try:
+        download_image(url, 'C:/Users/mathewsp/Desktop/Peeba/Images/', file_name)
+        print(file_name+' Downloaded')
+    except:
+        print(file_name+'Failed to download')
